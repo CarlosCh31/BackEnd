@@ -1,6 +1,5 @@
 package com.olimpiadas.inscriptionsback.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -28,7 +27,7 @@ public class Activity {
     private LocalDate date;
     private LocalTime time;
 
-    @Column(nullable = false)
+    @Column(name = "duration", nullable = false)
     private String duration;
 
     private String modality;
@@ -182,4 +181,5 @@ public class Activity {
     public void setState(String state) {
         this.state = state;
     }
+
 }

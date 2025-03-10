@@ -36,8 +36,17 @@ public class AdminService {
         adminRepository.deleteById(id);
     }
 
-    public Administrator findByIdAndPassword(String email, String password) {
-        return adminRepository.login(email, password);
+    public Optional<Administrator> findByIdAndPassword(String email, String password) {
+        Optional<Administrator> admin = adminRepository.findAll().stream()
+                .findFirst();
+        if (password.equals(admin.get().getPassword()) && email.equals(admin.get().getEmail()) ) {
+            return admin;
+        };
+        return Optional.empty();
+    }
+
+    public String actualizarAdministrador(String email, String password) {
+        return this.adminRepository.actualizarAdministrador(email, password);
     }
 
     /*public Administrator update(Administrator admin) {

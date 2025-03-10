@@ -2,6 +2,7 @@ package com.olimpiadas.inscriptionsback.Controllers;
 
 import com.olimpiadas.inscriptionsback.Models.Administrator;
 import com.olimpiadas.inscriptionsback.Service.AdminService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -28,13 +29,13 @@ public class AdminController {
         return adminService.save(admin);
     }
 
-    @GetMapping
-    public List<Administrator> findAll() {
+    @GetMapping("/getAll")
+    public List<Administrator> getAll() {
         return adminService.findAll();
     }
 
     @PostMapping("/login")
-    public Administrator findByIdAndPassword(@RequestBody Administrator admin) {
+    public Optional<Administrator> findByIdAndPassword(@RequestBody Administrator admin) {
         return adminService.findByIdAndPassword(admin.getEmail(), admin.getPassword());
 
     }
@@ -72,13 +73,10 @@ public class AdminController {
         adminService.deleteById(id);
     }
 
-   /* @PutMapping("/{id}")
-    public Administrator updateAdmin(@PathVariable Integer id, @RequestBody Administrator admin) {
-        admin.setId(id);
-        return adminService.update(admin);
+    @PutMapping("/edit")
+    public ResponseEntity<String> updateAdmin(@RequestBody Administrator admin) {
+        String result = adminService.actualizarAdministrador(admin.getEmail(), admin.getPassword());
+        return ResponseEntity.ok(result);
     }
-
-}
-    */
 
 }
