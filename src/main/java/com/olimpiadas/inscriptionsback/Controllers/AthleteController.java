@@ -24,26 +24,29 @@ public class AthleteController {
     }
 
     @PostMapping
-        public ResponseEntity<?> save(@RequestBody Athlete athlete) {
-            // Pre-validation of name
-            if (athlete.getName() == null || athlete.getName().isEmpty()) {
-                return ResponseEntity.badRequest().body(new ErrorResponse("name", "El nombre del atleta es requerido"));
-            }
-
-            try {
-                // Try to save athlete using service method
-                athleteService.save(athlete); // Let service handle transaction
-                return ResponseEntity.ok("Atleta guardado correctamente");
-            } catch (DataIntegrityViolationException e) {
-                // Handle specific database-related errors
-                String errorMessage = athleteService.handlePostgreSQLError(e);
-                return ResponseEntity.badRequest().body(new ErrorResponse(athleteService.extractFieldFromError(errorMessage), errorMessage));
-            } catch (Exception e) {
-                System.out.println(e);
-                // General error handling
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("general", e.getMessage()));
-            }
+    public ResponseEntity<?> save(@RequestBody Athlete athlete) {
+        // Pre-validation of name
+        athlete.setHeight(170.0);
+        athlete.setWeight(150.0);
+        athlete.setTipo("Atleta");
+        if (athlete.getName() == null || athlete.getName().isEmpty()) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("name", "El nombre del atleta es requerido"));
         }
+
+        try {
+            // Try to save athlete using service method
+            athleteService.save(athlete); // Let service handle transaction
+            return ResponseEntity.ok("Atleta guardado correctamente");
+        } catch (DataIntegrityViolationException e) {
+            // Handle specific database-related errors
+            String errorMessage = athleteService.handlePostgreSQLError(e);
+            return ResponseEntity.badRequest().body(new ErrorResponse(athleteService.extractFieldFromError(errorMessage), errorMessage));
+        } catch (Exception e) {
+            System.out.println(e);
+            // General error handling
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("general", e.getMessage()));
+        }
+    }
 
     @GetMapping
     public List<Athlete> findAll() {

@@ -1,12 +1,16 @@
 package com.olimpiadas.inscriptionsback.Models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "administrator")
 public class Administrator {
@@ -25,8 +29,21 @@ public class Administrator {
     @JsonIgnore
     private List<Activity> activities;
 
-    public Administrator() {
+    public Administrator (String email, String password) {
+        this.email = email;
+        this.password = password;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, password, activities);
+    }
+
+    public Administrator(Long id, String email) {
+        this.id = id;
+        this.email = email;
+    }
+
 
     public Administrator(Long id, String email, String password, List<Activity> activities) {
         this.id = id;

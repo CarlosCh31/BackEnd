@@ -19,7 +19,7 @@ public class ActivityController {
         this.activityService = activityService;
     }
 
-    @PutMapping("/register")
+    @PostMapping("/register")
     public int save(@RequestBody Activity activity) {
         return this.activityService.saveActivity(activity);
     }

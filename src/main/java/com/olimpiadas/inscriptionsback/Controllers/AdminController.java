@@ -3,6 +3,7 @@ package com.olimpiadas.inscriptionsback.Controllers;
 import com.olimpiadas.inscriptionsback.Models.Administrator;
 import com.olimpiadas.inscriptionsback.Service.AdminService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;

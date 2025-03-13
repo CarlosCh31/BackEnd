@@ -44,7 +44,6 @@ public class Activity {
 
     @ManyToOne
     @JoinColumn(name = "admin_email", referencedColumnName = "email", nullable = false)
-    @JsonIgnore
     private Administrator administrator;
 
 

@@ -1,8 +1,4 @@
 package com.olimpiadas.inscriptionsback.Service;
-import com.olimpiadas.inscriptionsback.Models.ErrorResponse;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import com.olimpiadas.inscriptionsback.Models.Athlete;
 import com.olimpiadas.inscriptionsback.Repositories.AthleteRepository;
