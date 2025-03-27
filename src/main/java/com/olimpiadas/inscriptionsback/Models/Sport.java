@@ -7,14 +7,14 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "sport")
-@PrimaryKeyJoinColumn(name = "activity_id")
+@PrimaryKeyJoinColumn(name = "id")
 public class Sport extends Activity {
 
     @Column(nullable = false)
     private String difficulty;
 
     @Column(name = "needs_special_equipment", nullable = false)
-    private Boolean needsSpecialEquipment;
+    private Boolean needs_special_equipment;
 
     @Column(name = "specifications")
     private String specifications;
@@ -26,10 +26,10 @@ public class Sport extends Activity {
     }
 
     public Sport(String type, String name, String description, LocalDate date, LocalTime time, String duration, String modality, String location, Integer maxParticipants, Integer minimumAge, Integer maximumAge, Administrator administrator, String state,
-                 String difficulty, Boolean needsSpecialEquipment, String specifications, String level) {
+                 String difficulty, Boolean needs_special_equipment, String specifications, String level) {
         super(type, name, description, date, time, duration, modality, location, maxParticipants, minimumAge, maximumAge, administrator, state);
         this.difficulty = difficulty;
-        this.needsSpecialEquipment = needsSpecialEquipment;
+        this.needs_special_equipment = needs_special_equipment;
         this.specifications = specifications;
         this.level = level;
     }
@@ -42,12 +42,12 @@ public class Sport extends Activity {
         this.difficulty = difficulty;
     }
 
-    public Boolean getNeedsSpecialEquipment() {
-        return needsSpecialEquipment;
+    public Boolean getNeeds_special_equipment() {
+        return needs_special_equipment;
     }
 
-    public void setNeedsSpecialEquipment(Boolean needsSpecialEquipment) {
-        this.needsSpecialEquipment = needsSpecialEquipment;
+    public void setNeeds_special_equipment(Boolean needsSpecialEquipment) {
+        this.needs_special_equipment = needsSpecialEquipment;
     }
 
     public String getSpecifications() {

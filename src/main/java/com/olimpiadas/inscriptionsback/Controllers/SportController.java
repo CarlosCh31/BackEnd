@@ -1,10 +1,16 @@
 package com.olimpiadas.inscriptionsback.Controllers;
 
+import com.olimpiadas.inscriptionsback.Models.Administrator;
 import com.olimpiadas.inscriptionsback.Models.Sport;
 import com.olimpiadas.inscriptionsback.Service.SportService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/sports")
@@ -17,9 +23,35 @@ public class SportController {
         this.sportService = sportService;
     }
 
-    @PostMapping
-    public Sport save(@RequestBody Sport sport) {
-        return sportService.save(sport);
+    @PostMapping("/register")
+    public ResponseEntity<Map<String, String>> saveSport(@RequestBody Sport sport) {
+        sport.setAdminEmail(new Administrator("admin@example.com", "admin"));
+        String result = sportService.saveSport(
+                sport.getType(),
+                sport.getName(),
+                sport.getDescription(),
+                Date.valueOf(sport.getDate()),
+                Time.valueOf(sport.getTime()),
+                sport.getDuration(),
+                sport.getModality(),
+                sport.getLocation(),
+                sport.getMaxParticipants(),
+                sport.getMinimumAge(),
+                sport.getMaximumAge(),
+                sport.getAdminEmail().getEmail(),
+                sport.getState(),
+
+                sport.getType(),
+                sport.getDifficulty(),
+                sport.getNeeds_special_equipment(),
+                sport.getSpecifications(),
+                sport.getLevel()
+        );
+        System.out.println(result);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", result);
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
