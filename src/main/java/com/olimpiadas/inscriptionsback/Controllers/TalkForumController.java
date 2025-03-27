@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/talk-forums")
@@ -19,7 +21,7 @@ public class TalkForumController {
     private TalkForumService talkForumService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> saveTalkForum(@RequestBody TalkForum talkForum) {
+    public ResponseEntity<Map<String, String>> saveTalkForum(@RequestBody TalkForum talkForum) {
         talkForum.setAdminEmail(new Administrator("admin@example.com", "admin"));
         String result = talkForumService.saveTalkForum(
                 talkForum.getType(),
@@ -39,7 +41,10 @@ public class TalkForumController {
                 talkForum.getTarget_audience()
         );
 
-        return ResponseEntity.ok(result);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", result);
+
+        return ResponseEntity.ok(response);
     }
 }
 

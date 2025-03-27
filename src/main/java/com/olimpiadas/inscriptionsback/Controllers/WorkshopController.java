@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/workshops")
@@ -32,7 +34,7 @@ public class WorkshopController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> saveWorkshopUsingFunction(@RequestBody Workshop dto) {
+    public ResponseEntity<Map<String, String>> saveWorkshopUsingFunction(@RequestBody Workshop dto) {
         dto.setAdminEmail(new Administrator("admin@example.com", "sapo"));
         String result = workshopService.saveWorkshop(
                 dto.getType(),
@@ -54,7 +56,10 @@ public class WorkshopController {
                 dto.getSpecifications()
         );
         System.out.println(result);
-        return ResponseEntity.ok(result);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", result);
+
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")
