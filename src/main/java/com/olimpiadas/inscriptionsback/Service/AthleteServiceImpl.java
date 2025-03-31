@@ -35,13 +35,13 @@ public class AthleteServiceImpl implements AthleteService {
     }
 
     @Override
-    public void deleteById(Integer id) {
-        athleteRepository.deleteById(id);
+    public void deleteById(String id) {
+        athleteRepository.deleteAthlete(id);
     }
 
     @Override
-    public Athlete update(Athlete athlete) {
-        return athleteRepository.save(athlete);
+    public String update(Athlete athlete) {
+        return athleteRepository.update(athlete.getId(), athlete.getLaterality(), athlete.getDisability_type(), athlete.getWeight(), athlete.getHeight());
     }
     @Override
     @Transactional // Ensures proper transaction management

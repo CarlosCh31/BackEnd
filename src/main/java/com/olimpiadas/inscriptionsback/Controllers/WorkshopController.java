@@ -48,7 +48,7 @@ public class WorkshopController {
                 dto.getMaxParticipants(),
                 dto.getMinimumAge(),
                 dto.getMaximumAge(),
-                dto.getAdminEmail().getEmail(),
+                dto.getAdministrator().getEmail(),
                 dto.getState(),
                 dto.getObjectives(),
                 dto.getTarget_audience(),

@@ -38,7 +38,7 @@ public class SportController {
                 sport.getMaxParticipants(),
                 sport.getMinimumAge(),
                 sport.getMaximumAge(),
-                sport.getAdminEmail().getEmail(),
+                sport.getAdministrator().getEmail(),
                 sport.getState(),
 
                 sport.getType(),

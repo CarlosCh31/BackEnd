@@ -35,7 +35,7 @@ public class TalkForumController {
                 talkForum.getMaxParticipants(),
                 talkForum.getMinimumAge(),
                 talkForum.getMaximumAge(),
-                talkForum.getAdminEmail().getEmail(), // acceso al administrador
+                talkForum.getAdministrator().getEmail(), // acceso al administrador
                 talkForum.getState(),
                 talkForum.getTheme(),
                 talkForum.getTarget_audience()

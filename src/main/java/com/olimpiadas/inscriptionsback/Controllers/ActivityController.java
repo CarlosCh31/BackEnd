@@ -1,7 +1,9 @@
 package com.olimpiadas.inscriptionsback.Controllers;
 
+import com.olimpiadas.inscriptionsback.DTO.ActivityDTO;
 import com.olimpiadas.inscriptionsback.Models.Activity;
 import com.olimpiadas.inscriptionsback.Service.ActivityService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,12 +27,21 @@ public class ActivityController {
     }
 
     @GetMapping("/getAll")
-    public List<Activity> getAll(){
+    public List<ActivityDTO> getAll(){
         return this.activityService.findAll();
     }
 
-    @DeleteMapping
-    public void deleteById(int id) {
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable int id) {
         this.activityService.deleteById(id);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> update(@RequestBody ActivityDTO activity) {
+        String result = this.activityService.update(activity.getId(), activity.getType(), activity.getName(),
+                activity.getDescription(), activity.getDate(), activity.getTime(), activity.getDuration(),
+                activity.getModality(), activity.getLocation(), activity.getMaxParticipants(),
+                activity.getMinimumAge(),activity.getMaximumAge(), activity.getAdministratorEmail(), activity.getState());
+        return ResponseEntity.ok(result);
     }
 }
