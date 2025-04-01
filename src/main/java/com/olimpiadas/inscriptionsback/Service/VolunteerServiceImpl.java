@@ -3,6 +3,7 @@ package com.olimpiadas.inscriptionsback.Service;
 import com.olimpiadas.inscriptionsback.Models.Volunteer;
 import com.olimpiadas.inscriptionsback.Repositories.VolunteerRepository;
 import com.olimpiadas.inscriptionsback.exception.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,12 +40,14 @@ public class VolunteerServiceImpl implements VolunteerService {
     }
 
     @Override
-    public void deleteById(Integer id) {
-        volunteerRepository.deleteById(id);
+    public String deleteById(Volunteer volunteer) {
+        return volunteerRepository.deleteVolunteer(volunteer.getId());
     }
 
+
     @Override
-    public Volunteer update(Volunteer volunteer) {
-        return volunteerRepository.save(volunteer);
+    public String update(Volunteer volunteer) {
+        return volunteerRepository.updateVolunteer(volunteer.getId(), volunteer.getSportExperience());
     }
+
 }

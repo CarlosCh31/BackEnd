@@ -1,6 +1,7 @@
 package com.olimpiadas.inscriptionsback.Service;
 
 import com.olimpiadas.inscriptionsback.Models.Volunteer;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,6 @@ public interface VolunteerService {
     void saveVolunteer(Volunteer volunteer);
     List<Volunteer> findAll();
     Volunteer findById(Integer id);
-    void deleteById(Integer id);
-    Volunteer update(Volunteer volunteer);
+    String deleteById(Volunteer volunteer);
+    String update(Volunteer volunteer);
 }
