@@ -51,4 +51,8 @@ public interface AthleteRepository extends JpaRepository<Athlete, Integer> {
     @Transactional
     @Query(value = "select update_athlete(:id, :laterality, :disability_type, :weight, :height)",nativeQuery = true)
     String update(String id, String laterality, String disability_type, Double weight, Double height);
+
+    @Transactional
+    @Query(value = "select update_athlete_manager(:id, :laterality, :disability_type, :state)", nativeQuery = true)
+    String updateManager(String id, String laterality, String disability_type, String state);
 }

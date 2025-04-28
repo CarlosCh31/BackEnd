@@ -11,7 +11,7 @@ public class Athlete extends Person {
 
     // Otros atributos específicos de Athlete
     @Column(name = "laterality")
-    @Size(max = 10, message = "Laterality cannot exceed 10 characters") // Validación de tamaño
+    @Size(max = 50, message = "Laterality cannot exceed 10 characters") // Validación de tamaño
     private String laterality;
 
     @Column(name = "disability_type")
@@ -25,6 +25,13 @@ public class Athlete extends Person {
     // Nuevo atributo: altura del atleta
     @Column(name = "height")
     private Double height;
+
+    @Column(name = "sub_program")
+    private String subProgram;
+
+    @Column(name = "state")
+    @Size(max = 50, message = "State type cannot exceed 50 characters")
+    private String state;
 
     // Getters y setters para laterality
     public String getLaterality() {
@@ -60,6 +67,34 @@ public class Athlete extends Person {
 
     public void setHeight(Double height) {
         this.height = height;
+    }
+
+    public String getSubProgram() {
+        return subProgram;
+    }
+
+    public void setSubProgram(String subProgram) {
+        this.subProgram = subProgram;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "Athlete{" +
+                "laterality='" + laterality + '\'' +
+                ", disability_type='" + disability_type + '\'' +
+                ", weight=" + weight +
+                ", height=" + height +
+                ", subProgram='" + subProgram + '\'' +
+                ", state='" + state + '\'' +
+                '}';
     }
 }
 

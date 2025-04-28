@@ -1,5 +1,6 @@
 package com.olimpiadas.inscriptionsback.Service;
 
+import com.olimpiadas.inscriptionsback.DTO.AthleteDTO;
 import com.olimpiadas.inscriptionsback.Models.Athlete;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
@@ -18,4 +19,5 @@ public interface AthleteService {
     public String handlePostgreSQLError(Exception e);
     public String extractFieldFromError(String detailedMessage);
 
+    String updateManager(Athlete athlete);
 }

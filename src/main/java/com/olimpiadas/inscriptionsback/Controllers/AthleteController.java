@@ -1,5 +1,6 @@
 package com.olimpiadas.inscriptionsback.Controllers;
 
+import com.olimpiadas.inscriptionsback.DTO.AthleteDTO;
 import com.olimpiadas.inscriptionsback.Models.Athlete;
 import com.olimpiadas.inscriptionsback.Models.ErrorResponse;
 import com.olimpiadas.inscriptionsback.Models.Sport;
@@ -67,6 +68,12 @@ public class AthleteController {
     @PutMapping("/update")
     public ResponseEntity<String> updateAthlete(@RequestBody Athlete athlete) {
         String result = athleteService.update(athlete);
+        return ResponseEntity.ok(result);
+    }
+
+    @PutMapping("/updateManager")
+    public ResponseEntity<String> updateAthleteManager(@RequestBody Athlete athlete) {
+        String result = athleteService.updateManager(athlete);
         return ResponseEntity.ok(result);
     }
 }
