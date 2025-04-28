@@ -32,8 +32,8 @@ public class AdminService {
         return admin.orElse(null);
     }
 
-    public void deleteById(Integer id) {
-        adminRepository.deleteById(id);
+    public void deleteById(String email) {
+        adminRepository.deleteAdministrador(email);
     }
 
     public Optional<Administrator> findByIdAndPassword(String email, String password) {
@@ -43,6 +43,10 @@ public class AdminService {
             return admin;
         };
         return Optional.empty();
+    }
+
+    public Optional<Administrator> findByEmail(String email) {
+        return adminRepository.findByEmail(email);
     }
 
     public String actualizarAdministrador(String email, String password) {

@@ -26,6 +26,16 @@ class AdminServiceTest {
         }
 
         @Override
+        public String deleteAdministrador(String email) {
+            return "";
+        }
+
+        @Override
+        public Optional<Administrator> findByEmail(String email) {
+            return Optional.empty();
+        }
+
+        @Override
         public void flush() {
 
         }

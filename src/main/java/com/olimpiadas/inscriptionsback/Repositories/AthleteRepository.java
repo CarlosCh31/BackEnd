@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface AthleteRepository extends JpaRepository<Athlete, Integer> {
@@ -43,5 +44,15 @@ public interface AthleteRepository extends JpaRepository<Athlete, Integer> {
                        @Param("a_disability_type") String a_disability_type,
                        @Param("a_weight") Double a_weight,
                        @Param("a_height") Double a_height);
+    @Transactional
+    @Query(value = "select delete_athlete_by_id(:id)")
+    void deleteAthlete(String id);
 
+    @Transactional
+    @Query(value = "select update_athlete(:id, :laterality, :disability_type, :weight, :height)",nativeQuery = true)
+    String update(String id, String laterality, String disability_type, Double weight, Double height);
+
+    @Transactional
+    @Query(value = "select update_athlete_manager(:id, :laterality, :disability_type, :state)", nativeQuery = true)
+    String updateManager(String id, String laterality, String disability_type, String state);
 }

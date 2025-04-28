@@ -1,72 +1,45 @@
-package com.olimpiadas.inscriptionsback.Models;
+package com.olimpiadas.inscriptionsback.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
+import com.olimpiadas.inscriptionsback.Models.Activity;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Entity
-@Table(name = "activity")
-@Inheritance(strategy = InheritanceType.JOINED)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Activity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ActivityDTO {
     private Long id;
-
-    @Column(name = "type", nullable = false)
-    private String type;
-
-    @Column(nullable = false, unique = true)
     private String name;
-
-
+    private String type;
     private String description;
     private LocalDate date;
     private LocalTime time;
-
-    @Column(name = "duration", nullable = false)
     private String duration;
-
     private String modality;
     private String location;
-
-    @Column(name = "max_participants", nullable = false)
     private Integer maxParticipants;
-
-    @Column(name = "minimum_age", nullable = false)
     private Integer minimumAge;
-
-    @Column(name = "maximum_age", nullable = false)
     private Integer maximumAge;
-
-    @ManyToOne
-    @JoinColumn(name = "admin_email", referencedColumnName = "email", nullable = false)
-    private Administrator administrator;
-
-
-    @Column(nullable = false)
     private String state;
+    private String administratorEmail;
 
-    public Activity() {
+    // Constructor que mapea desde la entidad
+    public ActivityDTO(Activity activity) {
+        this.id = activity.getId();
+        this.name = activity.getName();
+        this.type = activity.getType();
+        this.description = activity.getDescription();
+        this.date = activity.getDate();
+        this.time = activity.getTime();
+        this.duration = activity.getDuration();
+        this.modality = activity.getModality();
+        this.location = activity.getLocation();
+        this.maxParticipants = activity.getMaxParticipants();
+        this.minimumAge = activity.getMinimumAge();
+        this.maximumAge = activity.getMaximumAge();
+        this.state = activity.getState();
+        this.administratorEmail = activity.getAdministrator().getEmail();
     }
 
-    public Activity(String type, String name, String description, LocalDate date, LocalTime time, String duration, String modality, String location, Integer maxParticipants, Integer minimumAge, Integer maximumAge, Administrator administrator, String state) {
-        this.type = type;
-        this.name = name;
-        this.description = description;
-        this.date = date;
-        this.time = time;
-        this.duration = duration;
-        this.modality = modality;
-        this.location = location;
-        this.maxParticipants = maxParticipants;
-        this.minimumAge = minimumAge;
-        this.maximumAge = maximumAge;
-        this.administrator = administrator;
-        this.state = state;
+    public ActivityDTO() {
     }
 
     public Long getId() {
@@ -77,20 +50,20 @@ public class Activity {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getDescription() {
@@ -165,14 +138,6 @@ public class Activity {
         this.maximumAge = maximumAge;
     }
 
-    public Administrator getAdministrator() {
-        return administrator;
-    }
-
-    public void setAdminEmail(Administrator adminEmail) {
-        this.administrator = adminEmail;
-    }
-
     public String getState() {
         return state;
     }
@@ -181,4 +146,12 @@ public class Activity {
         this.state = state;
     }
 
+    public String getAdministratorEmail() {
+        return administratorEmail;
+    }
+
+    public void setAdministratorEmail(String administratorEmail) {
+        this.administratorEmail = administratorEmail;
+    }
 }
+

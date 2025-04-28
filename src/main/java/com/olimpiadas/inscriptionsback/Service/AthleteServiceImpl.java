@@ -1,5 +1,7 @@
 package com.olimpiadas.inscriptionsback.Service;
 
+import com.olimpiadas.inscriptionsback.DTO.ActivityDTO;
+import com.olimpiadas.inscriptionsback.DTO.AthleteDTO;
 import com.olimpiadas.inscriptionsback.Models.Athlete;
 import com.olimpiadas.inscriptionsback.Repositories.AthleteRepository;
 import com.olimpiadas.inscriptionsback.exception.ResourceNotFoundException;
@@ -7,7 +9,9 @@ import jakarta.transaction.Transactional;
 import org.postgresql.util.PSQLException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +28,7 @@ public class AthleteServiceImpl implements AthleteService {
 
     @Override
     public List<Athlete> findAll() {
-        return athleteRepository.findAll();
+        return this.athleteRepository.findAll();
     }
 
     @Override
@@ -35,13 +39,13 @@ public class AthleteServiceImpl implements AthleteService {
     }
 
     @Override
-    public void deleteById(Integer id) {
-        athleteRepository.deleteById(id);
+    public void deleteById(String id) {
+        athleteRepository.deleteAthlete(id);
     }
 
     @Override
-    public Athlete update(Athlete athlete) {
-        return athleteRepository.save(athlete);
+    public String update(Athlete athlete) {
+        return athleteRepository.update(athlete.getId(), athlete.getLaterality(), athlete.getDisability_type(), athlete.getWeight(), athlete.getHeight());
     }
     @Override
     @Transactional // Ensures proper transaction management
@@ -98,6 +102,12 @@ public class AthleteServiceImpl implements AthleteService {
             return matcher.group(1);  // Retorna el nombre del campo
         }
         return "desconocido";  // Si no se encuentra el campo
+    }
+
+    @Override
+    public String updateManager(Athlete athlete) {
+        System.out.println("Athlete recibido: " + athlete);
+        return athleteRepository.updateManager(athlete.getId(), athlete.getLaterality(), athlete.getDisability_type(), athlete.getState());
     }
 
 }

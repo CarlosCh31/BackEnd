@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface VolunteerRepository extends JpaRepository<Volunteer, Integer> {
 
@@ -17,5 +19,13 @@ public interface VolunteerRepository extends JpaRepository<Volunteer, Integer> {
             ":#{#volunteer.email}, :#{#volunteer.phone_number}, :#{#volunteer.nationality})",
             nativeQuery = true)
     void saveVolunteer(Volunteer volunteer);
+
+    @Transactional
+    @Query(value = "SELECT update_volunteer_sport_experience(:id, :sportExperience)", nativeQuery = true)
+    String updateVolunteer(String id, String sportExperience);
+
+    @Transactional
+    @Query(value = "SELECT delete_volunteer_by_id(:id)", nativeQuery = true)
+    String deleteVolunteer(String id);
 }
 

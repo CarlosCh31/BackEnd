@@ -2,6 +2,7 @@ package com.olimpiadas.inscriptionsback.Controllers;
 
 import com.olimpiadas.inscriptionsback.Models.Volunteer;
 import com.olimpiadas.inscriptionsback.Service.VolunteerService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class VolunteerController {
     }
 
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Volunteer> findAll() {
         return volunteerService.findAll();
     }
@@ -37,14 +38,15 @@ public class VolunteerController {
         return volunteerService.findById(id);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id) {
-        volunteerService.deleteById(id);
+    @PutMapping("/delete")
+    public ResponseEntity<String> deleteById(@RequestBody Volunteer volunteer) {
+        String result = volunteerService.deleteById(volunteer);
+        return ResponseEntity.ok(result);
     }
 
-    @PutMapping("/{id}")
-    public Volunteer updateVolunteer(@PathVariable Integer id, @RequestBody Volunteer volunteer) {
-       // volunteer.setId(id);
-        return volunteerService.update(volunteer);
+    @PutMapping("/edit")
+    public ResponseEntity<String> updateVolunteer(@RequestBody Volunteer volunteer) {
+        String result = volunteerService.update(volunteer);
+        return ResponseEntity.ok(result);
     }
 }

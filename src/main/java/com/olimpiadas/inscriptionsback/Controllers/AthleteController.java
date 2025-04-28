@@ -1,10 +1,12 @@
 package com.olimpiadas.inscriptionsback.Controllers;
 
+import com.olimpiadas.inscriptionsback.DTO.AthleteDTO;
 import com.olimpiadas.inscriptionsback.Models.Athlete;
 import com.olimpiadas.inscriptionsback.Models.ErrorResponse;
 import com.olimpiadas.inscriptionsback.Models.Sport;
 import com.olimpiadas.inscriptionsback.Models.SportLevel;
 import com.olimpiadas.inscriptionsback.Service.AthleteService;
+import org.apache.coyote.Response;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +50,7 @@ public class AthleteController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Athlete> findAll() {
         return athleteService.findAll();
     }
@@ -58,15 +60,21 @@ public class AthleteController {
         return athleteService.findById(id);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id) {
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable String id) {
         athleteService.deleteById(id);
     }
 
-    @PutMapping("/{id}")
-    public Athlete updateAthlete(@PathVariable String id, @RequestBody Athlete athlete) {
-        athlete.setId(id);
-        return athleteService.update(athlete);
+    @PutMapping("/update")
+    public ResponseEntity<String> updateAthlete(@RequestBody Athlete athlete) {
+        String result = athleteService.update(athlete);
+        return ResponseEntity.ok(result);
+    }
+
+    @PutMapping("/updateManager")
+    public ResponseEntity<String> updateAthleteManager(@RequestBody Athlete athlete) {
+        String result = athleteService.updateManager(athlete);
+        return ResponseEntity.ok(result);
     }
 }
 
