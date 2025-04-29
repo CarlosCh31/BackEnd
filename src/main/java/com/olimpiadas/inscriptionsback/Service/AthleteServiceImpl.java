@@ -65,7 +65,9 @@ public class AthleteServiceImpl implements AthleteService {
                 athlete.getLaterality(),
                 athlete.getDisability_type(),
                 athlete.getWeight(),
-                athlete.getHeight()
+                athlete.getHeight(),
+                athlete.getSubProgram(),
+                athlete.getState()
         ));
     }
 

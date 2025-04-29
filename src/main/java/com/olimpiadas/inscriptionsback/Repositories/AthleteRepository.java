@@ -29,7 +29,9 @@ public interface AthleteRepository extends JpaRepository<Athlete, Integer> {
             "CAST(:a_laterality AS VARCHAR), " +
             "CAST(:a_disability_type AS VARCHAR), " +
             "CAST(:a_weight AS DOUBLE PRECISION), " +
-            "CAST(:a_height AS DOUBLE PRECISION))",
+            "CAST(:a_height AS DOUBLE PRECISION)," +
+            "CAST(:a_sub_program AS VARCHAR)," +
+            "CAST(:a_state AS VARCHAR))",
             nativeQuery = true)
     String saveAthlete(@Param("p_id") String p_id,
                        @Param("p_name") String p_name,
@@ -43,7 +45,9 @@ public interface AthleteRepository extends JpaRepository<Athlete, Integer> {
                        @Param("a_laterality") String a_laterality,
                        @Param("a_disability_type") String a_disability_type,
                        @Param("a_weight") Double a_weight,
-                       @Param("a_height") Double a_height);
+                       @Param("a_height") Double a_height,
+                       @Param("a_sub_program") String a_sub_program,
+                       @Param("a_state") String state);
     @Transactional
     @Query(value = "select delete_athlete_by_id(:id)")
     void deleteAthlete(String id);
