@@ -6,6 +6,7 @@ import com.olimpiadas.inscriptionsback.Models.ErrorResponse;
 import com.olimpiadas.inscriptionsback.Models.Sport;
 import com.olimpiadas.inscriptionsback.Models.SportLevel;
 import com.olimpiadas.inscriptionsback.Service.AthleteService;
+import com.olimpiadas.inscriptionsback.exception.MessageResponse;
 import org.apache.coyote.Response;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -38,7 +39,7 @@ public class AthleteController {
         try {
             // Try to save athlete using service method
             athleteService.save(athlete); // Let service handle transaction
-            return ResponseEntity.ok("Atleta guardado correctamente");
+            return ResponseEntity.ok(new MessageResponse("Éxito: El atleta con ID " + athlete.getId() + " ha sido registrado correctamente."));
         } catch (DataIntegrityViolationException e) {
             // Handle specific database-related errors
             String errorMessage = athleteService.handlePostgreSQLError(e);
